@@ -10,8 +10,7 @@ from elasticsearch import Elasticsearch
 def handler(event, context):
     # Create a place to track any indices that are deleted.
     deleted_indices = {}
-    print('xx %s' % os.environ.get('endpoint', 'x'))
-    es = Elasticsearch(os.environ.get('endpoint', 'x'), use_ssl=True,
+    es = Elasticsearch(os.environ.get('endpoint'), use_ssl=True,
                        verify_certs=True, ca_certs=certifi.where())
 
     prefix = os.environ.get('prefix')

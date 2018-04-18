@@ -1,46 +1,5 @@
 certifi==2016.8.8
 elasticsearch-curator==4.0.6
 PyYAML==3.11
-
-
-
-
-docker run -d -e ES_HOSTS="http://kibana.mosaic.riotgames.com/" -e AWS_ACCESS_KEY="ASIAJ5QKEI35G6HB5EDQ" -e AWS_SECRET_ACCESS_KEY="FT4d9/BkRpqCXEygIRk3t4gJfPXSpgklGz98F8Ld" -p 5514:5514 -p 5515:5515 -p 5520:5520 -p 5521:5521 -p 5522:5522 -p 5523:5523 -p 5524:5524 -p 5525:5525 --name logstash 210953301138.dkr.ecr.us-west-2.amazonaws.com/pre/logstash:54
-
-
-  docker run -d --name consul_back -v /data -h $HOSTNAME \
-    -p 10.181.183.17:8300:8300 \
-    -p 10.181.183.17:8301:8301 -p 10.181.183.17:8301:8301/udp \
-    -p 10.181.183.17:8302:8302 -p 10.181.183.17:8302:8302/udp \
-    -p 10.181.183.17:8400:8400 \
-    -p 10.181.183.17:8500:8500 \
-    -p 172.17.42.1:53:8600 -p 172.17.42.1:53:8600/udp \
-    --log-driver=awslogs \
-    --log-opt awslogs-region=us-west-2 \
-    --log-opt awslogs-group=pre-prod/consul-server \
-    gliderlabs/consul-server:0.5 -advertise 10.181.183.17 -recursor 10.181.180.140 -recursor 10.181.180.181 -bootstrap-expect 3
-
-
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Principal": "*",
-      "Action": "es:*",
-      "Resource": "arn:aws:es:us-west-2:210953301138:domain/pre-app-logs-2",
-      "Condition": {
-        "IpAddress": {
-          "aws:SourceIp": [
-            "192.91.144.0/24",
-            "52.34.35.154",
-            "52.33.140.57",
-            "52.33.79.115",
-            "198.62.201.0/24",
-            "10.151.104.175"
-          ]
-        }
-      }
-    }
-  ]
-}
+boto3>=1.7.0
+aws-requests-auth>=0.3.0
